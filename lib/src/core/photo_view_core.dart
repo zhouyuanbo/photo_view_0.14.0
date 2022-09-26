@@ -41,6 +41,7 @@ class PhotoViewCore extends StatefulWidget {
     required this.filterQuality,
     required this.disableGestures,
     required this.enablePanAlways,
+    this.imageBorderRadiusValue,
   })  : customChild = null,
         super(key: key);
 
@@ -63,6 +64,7 @@ class PhotoViewCore extends StatefulWidget {
     required this.filterQuality,
     required this.disableGestures,
     required this.enablePanAlways,
+    this.imageBorderRadiusValue,
   })  : imageProvider = null,
         gaplessPlayback = false,
         super(key: key);
@@ -90,6 +92,8 @@ class PhotoViewCore extends StatefulWidget {
   final bool enablePanAlways;
 
   final FilterQuality filterQuality;
+
+  final double? imageBorderRadiusValue;
 
   @override
   State<StatefulWidget> createState() {
@@ -375,14 +379,23 @@ class PhotoViewCoreState extends State<PhotoViewCore>
   }
 
   Widget _buildChild() {
+    final useImageScale = widget.filterQuality != FilterQuality.none;
+    final computedScale = useImageScale ? 1.0 : scale;
+
     return widget.hasCustomChild
         ? widget.customChild!
-        : Image(
-            image: widget.imageProvider!,
-            gaplessPlayback: widget.gaplessPlayback ?? false,
-            filterQuality: widget.filterQuality,
-            width: scaleBoundaries.childSize.width * scale,
-            fit: BoxFit.contain,
+        : ClipRRect(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                  (widget.imageBorderRadiusValue ?? 0) / computedScale),
+            ),
+            child: Image(
+              image: widget.imageProvider!,
+              gaplessPlayback: widget.gaplessPlayback ?? false,
+              filterQuality: widget.filterQuality,
+              width: scaleBoundaries.childSize.width * scale,
+              fit: BoxFit.contain,
+            ),
           );
   }
 }

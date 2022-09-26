@@ -259,6 +259,7 @@ class PhotoView extends StatefulWidget {
     this.disableGestures,
     this.errorBuilder,
     this.enablePanAlways,
+    this.imageBorderRadiusValue,
   })  : child = null,
         childSize = null,
         super(key: key);
@@ -294,6 +295,7 @@ class PhotoView extends StatefulWidget {
     this.filterQuality,
     this.disableGestures,
     this.enablePanAlways,
+    this.imageBorderRadiusValue,
   })  : errorBuilder = null,
         imageProvider = null,
         gaplessPlayback = false,
@@ -343,6 +345,8 @@ class PhotoView extends StatefulWidget {
 
   /// The size of the custom [child]. [PhotoView] uses this value to compute the relation between the child and the container's size to calculate the scale value.
   final Size? childSize;
+
+  final double? imageBorderRadiusValue;
 
   /// Defines the maximum size in which the image will be allowed to assume, it
   /// is proportional to the original image size. Can be either a double (absolute value) or a
@@ -547,6 +551,7 @@ class _PhotoViewState extends State<PhotoView>
                 disableGestures: widget.disableGestures,
                 errorBuilder: widget.errorBuilder,
                 enablePanAlways: widget.enablePanAlways,
+                imageBorderRadiusValue: widget.imageBorderRadiusValue,
               );
       },
     );

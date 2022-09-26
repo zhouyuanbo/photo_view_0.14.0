@@ -32,6 +32,7 @@ class ImageWrapper extends StatefulWidget {
     required this.disableGestures,
     required this.errorBuilder,
     required this.enablePanAlways,
+    this.imageBorderRadiusValue,
   }) : super(key: key);
 
   final ImageProvider imageProvider;
@@ -58,6 +59,7 @@ class ImageWrapper extends StatefulWidget {
   final FilterQuality? filterQuality;
   final bool? disableGestures;
   final bool? enablePanAlways;
+  final double? imageBorderRadiusValue;
 
   @override
   _ImageWrapperState createState() => _ImageWrapperState();
@@ -198,6 +200,7 @@ class _ImageWrapperState extends State<ImageWrapper> {
       filterQuality: widget.filterQuality ?? FilterQuality.none,
       disableGestures: widget.disableGestures ?? false,
       enablePanAlways: widget.enablePanAlways ?? false,
+      imageBorderRadiusValue: widget.imageBorderRadiusValue,
     );
   }
 
